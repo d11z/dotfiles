@@ -1,5 +1,7 @@
 #!/bin/bash
 
+brew tap caskroom/versions
+
 brew cask install 1password
 brew cask install transmission
 
@@ -8,12 +10,12 @@ brew cask install beardedspice
 brew cask install spotify
 
 # browsers
-brew cask install google-chrome
+brew cask install google-chrome-canary
 brew cask install torbrowser
 
 # dev
 brew cask install virtualbox
-brew cask install iterm2
+brew cask install iterm2-nightly
 
 # utilities
 brew cask install launchbar

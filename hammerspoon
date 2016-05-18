@@ -28,7 +28,7 @@ function toggle_maximized()
 end
 
 -- bindings
-hs.hotkey.bind(alt_cmd       , 'space' , toggle_maximized)
+hs.hotkey.bind(alt_cmd       , 'm'     , toggle_maximized)
 
 hs.hotkey.bind(alt_cmd       , 'left'  , hs.grid.pushWindowLeft)
 hs.hotkey.bind(alt_cmd       , 'down'  , hs.grid.pushWindowDown)

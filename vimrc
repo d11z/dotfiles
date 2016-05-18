@@ -4,6 +4,9 @@ set nocompatible
 set lazyredraw
 set modelines=1
 
+" use system clipboard
+set clipboard=unnamed
+
 " don't open folds on block motions
 set foldopen-=block
 
