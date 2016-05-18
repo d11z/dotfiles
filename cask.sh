@@ -16,6 +16,7 @@ brew cask install torbrowser
 # dev
 brew cask install virtualbox
 brew cask install iterm2-nightly
+brew cask install imageoptim
 
 # utilities
 brew cask install launchbar
