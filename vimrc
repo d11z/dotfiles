@@ -117,6 +117,7 @@ Plug 'digitaltoad/vim-jade'
 " javascript
 Plug 'othree/yajs.vim'
 Plug 'scrooloose/syntastic'
+Plug 'https://github.com/strogonoff/vim-coffee-script'
 
 " appearance
 Plug 'itchyny/lightline.vim'
