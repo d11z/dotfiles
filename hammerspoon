@@ -1,5 +1,5 @@
 -- vim: set ft=lua:
-
+ 
 -- grid settings
 hs.grid.MARGINX    = 0
 hs.grid.MARGINY    = 0
@@ -9,9 +9,15 @@ hs.grid.GRIDHEIGHT = 2
 -- disable animation
 hs.window.animationDuration = 0
 
--- hotkeys
+-- keybindings
+local vim_bindings = true
 local alt_cmd = {'alt', 'cmd'}
 local shift_alt_cmd = {'shift', 'alt', 'cmd'}
+local left, up, down, right = 'left', 'up', 'down', 'right'
+
+if vim_bindings then
+  left, up, down, right = 'h', 'j', 'k', 'l'
+end
 
 -- toggle maximized
 local frameCache = {}
@@ -28,15 +34,15 @@ function toggle_maximized()
 end
 
 -- bindings
-hs.hotkey.bind(alt_cmd       , 'm'     , toggle_maximized)
+hs.hotkey.bind(alt_cmd       , 'm'   , toggle_maximized)
 
-hs.hotkey.bind(alt_cmd       , 'left'  , hs.grid.pushWindowLeft)
-hs.hotkey.bind(alt_cmd       , 'down'  , hs.grid.pushWindowDown)
-hs.hotkey.bind(alt_cmd       , 'up'    , hs.grid.pushWindowUp)
-hs.hotkey.bind(alt_cmd       , 'right' , hs.grid.pushWindowRight)
+hs.hotkey.bind(alt_cmd       , left  , hs.grid.pushWindowLeft)
+hs.hotkey.bind(alt_cmd       , down  , hs.grid.pushWindowDown)
+hs.hotkey.bind(alt_cmd       , up    , hs.grid.pushWindowUp)
+hs.hotkey.bind(alt_cmd       , right , hs.grid.pushWindowRight)
 
-hs.hotkey.bind(shift_alt_cmd , 'left'  , hs.grid.resizeWindowThinner)
-hs.hotkey.bind(shift_alt_cmd , 'down'  , hs.grid.resizeWindowShorter)
-hs.hotkey.bind(shift_alt_cmd , 'up'    , hs.grid.resizeWindowTaller)
-hs.hotkey.bind(shift_alt_cmd , 'right' , hs.grid.resizeWindowWider)
+hs.hotkey.bind(shift_alt_cmd , left  , hs.grid.resizeWindowThinner)
+hs.hotkey.bind(shift_alt_cmd , down  , hs.grid.resizeWindowShorter)
+hs.hotkey.bind(shift_alt_cmd , up    , hs.grid.resizeWindowTaller)
+hs.hotkey.bind(shift_alt_cmd , right , hs.grid.resizeWindowWider)
 
