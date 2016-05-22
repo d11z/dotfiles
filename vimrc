@@ -89,21 +89,25 @@ nmap <Leader>pi :so ~/.vimrc<CR>:PlugInstall<CR>
 call plug#begin('~/.vim/plugged')
 
 " general
+Plug 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
+Plug 'godlygeek/tabular'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-fugitive'
-Plug 'godlygeek/tabular'
 
 " completion
-" if has("nvim")
-"   Plug 'Shougo/deoplete.nvim'
-" else
-"   Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-"   Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-" endif
+if has("nvim")
+  Plug 'Shougo/deoplete.nvim'
+else
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+  Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+endif
 
 " navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -117,7 +121,7 @@ Plug 'digitaltoad/vim-jade'
 " javascript
 Plug 'othree/yajs.vim'
 Plug 'scrooloose/syntastic'
-Plug 'https://github.com/strogonoff/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 
 " appearance
 Plug 'itchyny/lightline.vim'
@@ -172,7 +176,8 @@ let g:startify_list_order = [
 
 set list
 set listchars=""
-set listchars+=tab:··
+set listchars+=nbsp:·
+set listchars+=tab:>·
 set listchars+=eol:¬
 
 " }}}
