@@ -1,0 +1,25 @@
+[user]
+	name = Deniz Basegmez
+	email = deniz@basegmez.tech
+
+[core]
+  pager = delta
+  compression = 0
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true
+
+[merge]
+  conflicstyle = diff3
+
+[diff]
+  colorMoved = default
+
+[init]
+  defaultBranch = main
+
+[ghq]
+  root = ~/github
