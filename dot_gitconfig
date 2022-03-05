@@ -23,3 +23,33 @@
 
 [ghq]
   root = ~/github
+
+
+[alias]
+  a = add
+  ap = add -p
+  bd = branch -D
+  c = commit
+  cm = commit -m
+  co = checkout
+  cob = checkout -b
+  f = fetch -p
+  d = !git --no-pager diff
+  stat = !git --no-pager diff --stat
+  p = push
+  pf = push --force
+  rba = rebase --abort
+  rgc = rebase --continue
+  rb = "!git fetch origin main:main && git rebase main"
+  rbdevelop = "!git fetch origin develop:develop && git rebase develop"
+  rbmaster  = "!git fetch origin master:master && git rebase master"
+  rlc = reset HEAD~
+  sf = "!git fetch --all --tags && git checkout main && git merge upstream/main && git push origin main --tags"
+  sfmaster = "!git fetch --all --tags && git checkout master && git merge upstream/master && git push origin master --tags"
+  st = stash
+  std = stash drop
+  stl = stash list
+  stp = stash pop
+  s = status -sb
+  lg = log --graph --all --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr) %C(bold blue)%an%Creset %C(yellow)%d%Creset'
+

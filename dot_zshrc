@@ -40,14 +40,33 @@ zi load hlissner/zsh-autopair
 zi light supercrabtree/k
 alias ka="k -a"
 
+# get help
+zi ice lucid wait as'program' from"gh-r" has'fzf'
+
+zi light denisidoro/navi
+
+# file browser
+
+zi pick"misc/quitcd/quitcd.zsh" sbin make light-mode for jarun/nnn
+
 # gui to manage plugins, press ctrl-o-k
 zi light z-shell/zi-crasis
 
-zi light z-shell/zsh-select
+zi load z-shell/zsh-select
 
+# fzf powered tab-completion
 zi ice lucid wait has'fzf'
 zi light Aloxaf/fzf-tab
 
+zi wait lucid for atclone"autoreconf -fi && ./configure --with-oniguruma=builtin && make \
+&& ln -sfv $PWD/jq.1 $ZPFX/man/man1" as"null" if"(( ! ${+commands[jq]} ))" sbin"jq" \
+    stedolan/jq
+
+# syntax-highlighted pager for git, dif, and grep output
+zi ice wait lucid as'program' from'gh-r' sbin'**/delta -> delta'
+zi light dandavison/delta
+
+# pretty completion
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:match:*' original only
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3>7?7:($#PREFIX+$#SUFFIX)/3))numeric)'
@@ -78,11 +97,9 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 export HISTTIMEFORMAT="[%F %T] "
-
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_REDUCE_BLANKS
-
 setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
 setopt EXTENDED_HISTORY  # record command start time
 
@@ -92,13 +109,41 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
-alias cat=bat
+alias cat="bat"
 
-alias lvim=/home/deniz/.local/bin/lvim
-alias nvim=lvim
+alias lvim="/home/deniz/.local/bin/lvim"
+alias nvim="lvim"
 
-alias n=nb
-alias g=git
+alias n="nb"
+alias g="git"
+alias e="lvim --"
+alias t="tmux"
+alias m="man"
+
+alias q="exit"
+
+alias ~="cd ~"
+alias p="cd ~/@projects"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+
+alias cp="cp -iv"
+#             │└─ list copied files
+#             └─ prompt before overwriting an existing file
+
+
+alias mkdir="mkdir -pv"
+#                   │└─ list created directories
+#                   └─ create intermediate directories
+
+
+alias mv="mv -iv"
+#             │└─ list moved files
+#             └─ prompt before overwriting an existing file
+
+alias rm="rm -rf --"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
