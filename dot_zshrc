@@ -1,4 +1,7 @@
 # deniz basegmez 2022
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
   print -P "%F{33}▓▒░ %F{160}Installing (%F{33}z-shell/zi%F{160})…%f"
@@ -20,15 +23,16 @@ zi light-mode for \
   @console-tools \
   @fuzzy \
   @ext-git \
+  @romkatv \
   @rust-utils
-
-# prompt theme
-zi lucid atload"!geometry::prompt" nocd \
-    atinit"GEOMETRY_COLOR_DIR=63 GEOMETRY_PATH_COLOR=63" for \
-    geometry-zsh/geometry
 
 zi pack for ls_colors
 
+# neovim nightly
+zi ice as'program' bpick'*linux64.tar.gz' from'gh-r' ver'nightly' sbin'**/bin/nvim -> nvim'
+zi light neovim/neovim
+
+# notebook
 zi pack for nb
 
 zi wait pack atload=+"zicompinit; zicdreplay" for system-completions
@@ -46,7 +50,6 @@ zi ice lucid wait as'program' from"gh-r" has'fzf'
 zi light denisidoro/navi
 
 # file browser
-
 zi pick"misc/quitcd/quitcd.zsh" sbin make light-mode for jarun/nnn
 
 # gui to manage plugins, press ctrl-o-k
@@ -54,9 +57,17 @@ zi light z-shell/zi-crasis
 
 zi load z-shell/zsh-select
 
+zi ice gem"!tmuxinator"
+zi load tmuxinator/tmuxinator
+
 # fzf powered tab-completion
 zi ice lucid wait has'fzf'
 zi light Aloxaf/fzf-tab
+
+zi ice rustup cargo'stylua'
+zi load z-shell/null
+
+zi load jeffreytse/zsh-vi-mode
 
 zi wait lucid for atclone"autoreconf -fi && ./configure --with-oniguruma=builtin && make \
 && ln -sfv $PWD/jq.1 $ZPFX/man/man1" as"null" if"(( ! ${+commands[jq]} ))" sbin"jq" \
@@ -73,12 +84,12 @@ zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX
 zstyle ':completion:*:matches' group 'yes'
 zstyle ':completion:*:options' description 'yes'
 zstyle ':completion:*:options' auto-description '%d'
-zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
-zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
-zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
-zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
-zstyle ':completion:*:default' list-prompt '%S%M matches%s'
-zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
+# zstyle ':completion:*:corrections' format ' %F{green}-- %d (errors: %e) --%f'
+# zstyle ':completion:*:descriptions' format ' %F{yellow}-- %d --%f'
+# zstyle ':completion:*:messages' format ' %F{purple} -- %d --%f'
+# zstyle ':completion:*:warnings' format ' %F{red}-- no matches found --%f'
+# zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+# zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -112,13 +123,17 @@ eval "$(pyenv virtualenv-init -)"
 alias cat="bat"
 
 alias lvim="/home/deniz/.local/bin/lvim"
-alias nvim="lvim"
 
 alias n="nb"
 alias g="git"
 alias e="lvim --"
-alias t="tmux"
 alias m="man"
+
+alias t="tmux"
+alias ta="tmux attach -t"
+alias tls="tmux list-sessions"
+alias tn="tmux new -t"
+alias mux="tmuxinator"
 
 alias q="exit"
 
@@ -128,6 +143,8 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+
+alias _="sudo"
 
 alias cp="cp -iv"
 #             │└─ list copied files
@@ -154,5 +171,10 @@ setopt RM_STAR_WAIT
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+export DENO_INSTALL="/home/deniz/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
 export EDITOR=/home/deniz/.local/bin/lvim
+
+eval "$(pyenv init -)"
 
